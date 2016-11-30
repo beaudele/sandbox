@@ -1,31 +1,45 @@
 package com.sandbox.springmvc.model;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private long id;
-	
+@Entity
+@Table(name = "registereduser")
+public class RegisteredUser {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
+
+	@Column(name = "username")
 	private String username;
-	
+
+	@Column(name = "address")
 	private String address;
 	
+	@Column(name = "email")
 	private String email;
-	
-	public User(){
-		id=0;
+
+	public RegisteredUser() {
 	}
-	
-	public User(long id, String username, String address, String email){
+
+	public RegisteredUser(long id, String username, String address, String email) {
 		this.id = id;
 		this.username = username;
 		this.address = address;
 		this.email = email;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -67,9 +81,9 @@ public class User {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof User))
+		if (!(obj instanceof RegisteredUser))
 			return false;
-		User other = (User) obj;
+		RegisteredUser other = (RegisteredUser) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -77,10 +91,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", address=" + address
-				+ ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + username + ", address=" + address + ", email=" + email + "]";
 	}
-	
 
-	
 }
