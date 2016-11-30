@@ -1,12 +1,10 @@
-package com.sandbox.springmvc.service;
+package com.sandbox.springmvc.dao;
 
 import java.util.List;
 
 import com.sandbox.springmvc.model.RegisteredUser;
 
-
-
-public interface UserService {
+public interface UserDao {
 	
 	RegisteredUser findById(Long id);
 	
@@ -23,5 +21,5 @@ public interface UserService {
 	void deleteAllUsers();
 	
 	public boolean isUserExist(RegisteredUser user);
-	
+
 }
