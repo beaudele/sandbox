@@ -41,7 +41,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	@Override
 	public void updateUser(RegisteredUser user) {
-		getSession().update(user);
+		update(user);
 	}
 
 	@Override

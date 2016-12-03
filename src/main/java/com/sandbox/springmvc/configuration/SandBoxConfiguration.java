@@ -12,8 +12,8 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.sandbox.springmvc")
-public class SandBoxConfiguration extends WebMvcConfigurerAdapter{
-	
+public class SandBoxConfiguration extends WebMvcConfigurerAdapter {
+
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -25,7 +25,7 @@ public class SandBoxConfiguration extends WebMvcConfigurerAdapter{
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+		registry.addResourceHandler("/static/**").addResourceLocations("/static/").setCachePeriod(0);
 	}
 
 }
