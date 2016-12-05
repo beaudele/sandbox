@@ -1,26 +1,26 @@
 package com.sandbox.springmvc.dao;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
- 
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 public abstract class AbstractDao {
- 
-    @Autowired
-    private SessionFactory sessionFactory;
- 
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
- 
-    public void persist(Object entity) {
-        getSession().persist(entity);
-    }
- 
-    public void delete(Object entity) {
-        getSession().delete(entity);
-    }
- 
-    public void update(Object entity) {
-        getSession().update(entity);
-    }
+
+	@PersistenceContext
+	private EntityManager manager;
+
+	protected EntityManager getEntityManager() {
+		return manager;
+	}
+
+	public void persist(Object entity) {
+		getEntityManager().persist(entity);
+	}
+
+	public void delete(Object entity) {
+		getEntityManager().remove(entity);
+	}
+
+	public void update(Object entity) {
+		getEntityManager().merge(entity);
+	}
 }

@@ -11,7 +11,7 @@ angular.module('myApp').controller('UserEditController', ['$scope', '$state', 'a
     function updateUser(user, id){
         UserService.updateUser(user, id)
             .then(
-            function(){},
+            function(){$state.go('user_list');},
             function(errResponse){
                 console.error('Error while updating User');
             }
@@ -22,7 +22,6 @@ angular.module('myApp').controller('UserEditController', ['$scope', '$state', 'a
         updateUser(self.user, self.user.id);
         console.log('User updated with id ', self.user.id);
         reset();
-        $state.go('user_list');
     }
 
     function reset(){

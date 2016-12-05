@@ -15,7 +15,6 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
     return factory;
 
     function fetchAllUsers() {
-        console.log('fetch all users');
         var deferred = $q.defer();
         $http.get(REST_SERVICE_URI)
             .then(

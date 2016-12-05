@@ -3,13 +3,11 @@
  */
 package com.sandbox.springmvc.dao;
 
-import java.math.BigInteger;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sandbox.springmvc.model.RegisteredUser;
 
@@ -18,20 +16,17 @@ import com.sandbox.springmvc.model.RegisteredUser;
  *
  */
 @Repository("userDao")
+@Transactional
 public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	@Override
 	public RegisteredUser findById(Long id) {
-		Criteria criteria = getSession().createCriteria(RegisteredUser.class);
-		criteria.add(Restrictions.eq("id", id));
-		return (RegisteredUser) criteria.uniqueResult();
+		return getEntityManager().find(RegisteredUser.class, id);
 	}
 
 	@Override
 	public RegisteredUser findByName(String name) {
-		Criteria criteria = getSession().createCriteria(RegisteredUser.class);
-		criteria.add(Restrictions.eq("username", name));
-		return (RegisteredUser) criteria.uniqueResult();
+		return getEntityManager().find(RegisteredUser.class, name);
 	}
 
 	@Override
@@ -46,20 +41,19 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
 	@Override
 	public void deleteUserById(Long id) {
-		Query query = getSession().createSQLQuery("delete from RegisteredUser where id = :id");
-		query.setBigInteger("id", BigInteger.valueOf(id));
+		javax.persistence.Query query = getEntityManager()
+				.createNativeQuery("delete from RegisteredUser where id =" + id);
 		query.executeUpdate();
 	}
 
 	@Override
 	public List<RegisteredUser> findAllUsers() {
-		Criteria criteria = getSession().createCriteria(RegisteredUser.class);
-		return (List<RegisteredUser>) criteria.list();
+		return getEntityManager().createQuery("select a from RegisteredUser a", RegisteredUser.class).getResultList();
 	}
 
 	@Override
 	public void deleteAllUsers() {
-		Query query = getSession().createSQLQuery("delete from RegisteredUser");
+		javax.persistence.Query query = getEntityManager().createNativeQuery("delete from RegisteredUser");
 		query.executeUpdate();
 	}
 

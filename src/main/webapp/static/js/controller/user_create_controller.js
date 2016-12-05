@@ -10,7 +10,7 @@ angular.module('myApp').controller('UserCreateController', ['$scope', '$state', 
     function createUser(user){
         UserService.createUser(user)
             .then(
-            function(){},
+            function(){$state.go('user_list');},
             function(errResponse){
                 console.error('Error while creating User');
             }
@@ -21,7 +21,6 @@ angular.module('myApp').controller('UserCreateController', ['$scope', '$state', 
         console.log('Saving New User', self.user);
         createUser(self.user);
         reset();
-        $state.go('user_list', {async: null, cache: false});
     }
 
     function reset(){

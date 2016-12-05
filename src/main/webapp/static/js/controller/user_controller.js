@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('myApp').controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
+angular.module('myApp').controller('UserController', ['$scope', 'async', 'UserService', function($scope, async, UserService) {
     var self = this;
-    self.users=[];
-    
-    fetchAllUsers();
+    self.users=async;
 
     self.remove = remove;
+    
+    fetchAllUsers();
 
     function fetchAllUsers(){
         console.log('fetch all users');
