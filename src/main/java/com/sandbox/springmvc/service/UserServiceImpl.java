@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sandbox.springmvc.dao.UserDao;
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService{
 		userDao.saveUser(user);
 	}
 
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void updateUser(RegisteredUser user) {
 		userDao.updateUser(user);
 	}

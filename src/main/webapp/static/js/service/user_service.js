@@ -6,6 +6,7 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
 
     var factory = {
         fetchAllUsers: fetchAllUsers,
+        findById: findById,
         createUser: createUser,
         updateUser:updateUser,
         deleteUser:deleteUser
@@ -28,6 +29,21 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
         return deferred.promise;
     }
 
+    function findById(id) {
+        var deferred = $q.defer();
+        $http.get(REST_SERVICE_URI+id)
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while fetching Users');
+                deferred.reject(errResponse);
+            }
+        );
+        return deferred.promise;
+    }
+    
     function createUser(user) {
         var deferred = $q.defer();
         $http.post(REST_SERVICE_URI, user)
@@ -45,6 +61,8 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
 
 
     function updateUser(user, id) {
+        console.log('update user '+id );
+        console.log(user.address);
         var deferred = $q.defer();
         $http.put(REST_SERVICE_URI+id, user)
             .then(
