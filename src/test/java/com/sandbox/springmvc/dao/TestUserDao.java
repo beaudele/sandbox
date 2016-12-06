@@ -31,11 +31,14 @@ public class TestUserDao {
 	UserDao userDao;
 
 	@Test
+	public void testUserDao() {
+		Assert.assertNotNull(userDao);
+	}
+
+	@Test
 	@Transactional
 	@Rollback(true)
 	public void testUpdateRegisteredUser() {
-		Assert.assertNotNull(userDao);
-
 		List<RegisteredUser> findAllUsers = userDao.findAllUsers();
 		if (!findAllUsers.isEmpty()) {
 			RegisteredUser regUser = findAllUsers.get(0);
@@ -50,5 +53,16 @@ public class TestUserDao {
 			RegisteredUser retrievedRegUser = userDao.findById(id);
 			Assert.assertEquals(add + add, retrievedRegUser.getAddress());
 		}
+	}
+
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void testCreateRegisteredUser() {
+		RegisteredUser user = new RegisteredUser();
+		user.setAddress("address");
+		user.setEmail("email@email.fr");
+		user.setUsername("username");
+		userDao.saveUser(user);
 	}
 }
