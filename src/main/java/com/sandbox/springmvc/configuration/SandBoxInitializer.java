@@ -1,30 +1,61 @@
 package com.sandbox.springmvc.configuration;
 
-import javax.servlet.Filter;
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+
+/**
+ * The Class SandBoxInitializer.
+ */
 public class SandBoxInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
- 
-    @Override
-    protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { SandBoxConfiguration.class };
-    }
-  
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return null;
-    }
-  
-    @Override
-    protected String[] getServletMappings() {
-        return new String[] { "/" };
-    }
-    
-    @Override
-    protected Filter[] getServletFilters() {
-    	Filter [] singleton = { new CORSFilter() };
-    	return singleton;
-	}
- 
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer#
+   * getRootConfigClasses()
+   */
+  @Override
+  protected Class<?>[] getRootConfigClasses() {
+    return new Class[] {SandBoxConfiguration.class};
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer#
+   * getServletConfigClasses()
+   */
+  @Override
+  protected Class<?>[] getServletConfigClasses() {
+    return null;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.springframework.web.servlet.support.AbstractDispatcherServletInitializer#getServletMappings
+   * ()
+   */
+  @Override
+  protected String[] getServletMappings() {
+    return new String[] {"/"};
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.springframework.web.servlet.support.AbstractDispatcherServletInitializer#getServletFilters(
+   * )
+   */
+  @Override
+  protected Filter[] getServletFilters() {
+    Filter[] singleton = {new CorsFilter()};
+    return singleton;
+  }
+
 }
