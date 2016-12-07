@@ -2,16 +2,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.sandbox.springmvc</groupId>
-  <artifactId>sandbox-springmvc4.3-hibernate4-angularjs1.4</artifactId>
+  <artifactId>sandbox</artifactId>
   <packaging>war</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <name>sandbox Maven Webapp</name>
-  
+
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>com.sandbox.springmvc</groupId>
-        <artifactId>sandbox-springmvc4.3-hibernate4-angularjs1.4-bom</artifactId>
+        <artifactId>sandbox-bom</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
